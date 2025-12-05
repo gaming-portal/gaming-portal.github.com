@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming.com - Play Free Online Games</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Orbitron', 'Segoe UI', sans-serif;
+            background: #000000;
+            color: #00ff00;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(0, 255, 0, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .neon-line {
+            position: fixed;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff00, transparent);
+            box-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+            animation: moveLine 3s linear infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        @keyframes moveLine {
+            0% { width: 0; left: 0; }
+            50% { width: 100%; left: 0; }
+            100% { width: 0; left: 100%; }
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px 0;
+            border-bottom: 2px solid #00ff00;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: bold;
+            color: #00ff00;
+            text-shadow: 
+                0 0 10px #00ff00,
+                0 0 20px #00ff00,
+                0 0 30px #00ff00;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00; }
+            50% { text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 40px #00ff00; }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #00ff00;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px #00ff00;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00ff00;
+            box-shadow: 0 0 10px #00ff00;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            text-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00;
+        }
+
+        main {
+            padding: 40px 0;
+        }
+
+        .hero {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff00;
+            border-radius: 20px;
+            padding: 60px;
+            margin-bottom: 40px;
+            text-align: center;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 0, 0.3),
+                inset 0 0 20px rgba(0, 255, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(0, 255, 0, 0.1) 50%,
+                transparent 70%
+            );
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%) translateY(-100%); }
+            100% { transform: translateX(100%) translateY(100%); }
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            color: #00ff00;
+            margin-bottom: 20px;
+            text-shadow: 
+                0 0 10px #00ff00,
+                0 0 20px #00ff00,
+                0 0 30px #00ff00,
+                0 0 40px #00ff00;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #00ff00;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .section-title {
+            color: #00ff00;
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-shadow: 
+                0 0 10px #00ff00,
+                0 0 20px #00ff00;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #00ff00, transparent);
+            box-shadow: 0 0 10px #00ff00;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .category-card {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00ff00;
+            border-radius: 15px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+            position: relative;
+            text-decoration: none;
+            display: block;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .category-card:hover::before {
+            left: 100%;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 
+                0 0 30px rgba(0, 255, 0, 0.6),
+                0 10px 40px rgba(0, 255, 0, 0.4);
+            border-color: #00ff00;
+        }
+
+        .category-icon {
+            width: 100%;
+            height: 180px;
+            background: linear-gradient(135deg, #001100 0%, #003300 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            border-bottom: 2px solid #00ff00;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-icon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 255, 0, 0.03) 0px,
+                    transparent 1px,
+                    transparent 2px,
+                    rgba(0, 255, 0, 0.03) 3px
+                );
+            animation: scanlines 8s linear infinite;
+        }
+
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(10px); }
+        }
+
+        .category-info {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .category-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ff00;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+
+        .category-description {
+            font-size: 14px;
+            color: rgba(0, 255, 0, 0.7);
+            margin-bottom: 15px;
+        }
+
+        .play-btn {
+            display: inline-block;
+            padding: 10px 30px;
+            background: rgba(0, 255, 0, 0.2);
+            border: 2px solid #00ff00;
+            border-radius: 20px;
+            color: #00ff00;
+            font-weight: bold;
+            text-shadow: 0 0 10px #00ff00;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+            transition: all 0.3s;
+        }
+
+        .category-card:hover .play-btn {
+            background: rgba(0, 255, 0, 0.4);
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.6);
+            transform: scale(1.05);
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.9);
+            border-top: 2px solid #00ff00;
+            padding: 40px 0;
+            margin-top: 60px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+        }
+
+        .footer-content {
+            color: #00ff00;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #00ff00;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-shadow: 0 0 5px #00ff00;
+        }
+
+        .footer-links a:hover {
+            text-shadow: 0 0 15px #00ff00, 0 0 25px #00ff00;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+
+            .hero {
+                padding: 30px 20px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .categories-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 15px;
+            }
+
+            .category-icon {
+                height: 120px;
+                font-size: 50px;
+            }
+
+            .category-title {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="neon-line" style="top: 10%; animation-delay: 0s;"></div>
+    <div class="neon-line" style="top: 40%; animation-delay: 1s;"></div>
+    <div class="neon-line" style="top: 70%; animation-delay: 2s;"></div>
+
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">🎮 GAMING.COM</div>
+                <nav class="nav-links">
+                    <a href="https://poki.com" target="_blank">POKI HOME</a>
+                    <a href="https://poki.com/en/new" target="_blank">NEW GAMES</a>
+                    <a href="https://poki.com/en/popular" target="_blank">POPULAR</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1>WELCOME TO GAMING.COM</h1>
+            <p>Your portal to the best gaming categories - click any category to explore games on Poki</p>
+        </section>
+
+        <section id="categories-section">
+            <h2 class="section-title">▶ GAME CATEGORIES</h2>
+            <div class="categories-grid" id="categoriesGrid"></div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>© 2024 GAMING.COM - YOUR GATEWAY TO GAMING</p>
+                <p style="margin-top: 10px; font-size: 14px; opacity: 0.7;">Categories link to Poki.com for game playing</p>
+                <div class="footer-links">
+                    <a href="#about">ABOUT</a>
+                    <a href="#contact">CONTACT</a>
+                    <a href="#privacy">PRIVACY</a>
+                    <a href="#terms">TERMS</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const categories = [
+            { 
+                title: 'ACTION', 
+                icon: '⚔️', 
+                url: 'https://poki.com/en/action',
+                description: 'Fast-paced combat and thrilling gameplay'
+            },
+            { 
+                title: 'ADVENTURE', 
+                icon: '🗺️', 
+                url: 'https://poki.com/en/adventure',
+                description: 'Explore amazing worlds and stories'
+            },
+            { 
+                title: 'PUZZLE', 
+                icon: '🧩', 
+                url: 'https://poki.com/en/puzzle',
+                description: 'Challenge your mind with brain teasers'
+            },
+            { 
+                title: 'RACING', 
+                icon: '🏎️', 
+                url: 'https://poki.com/en/racing',
+                description: 'Speed through exciting race tracks'
+            },
+            { 
+                title: 'SPORTS', 
+                icon: '⚽', 
+                url: 'https://poki.com/en/sports',
+                description: 'Play your favorite sports games'
+            },
+            { 
+                title: 'SHOOTING', 
+                icon: '🎯', 
+                url: 'https://poki.com/en/shooting',
+                description: 'Aim, shoot, and dominate'
+            },
+            { 
+                title: '2 PLAYER', 
+                icon: '🎮', 
+                url: 'https://poki.com/en/2-player',
+                description: 'Challenge friends in multiplayer'
+            },
+            { 
+                title: 'STRATEGY', 
+                icon: '♟️', 
+                url: 'https://poki.com/en/strategy',
+                description: 'Plan your way to victory'
+            },
+            { 
+                title: 'CAR', 
+                icon: '🚗', 
+                url: 'https://poki.com/en/car',
+                description: 'Drive amazing vehicles'
+            },
+            { 
+                title: 'CASUAL', 
+                icon: '🎲', 
+                url: 'https://poki.com/en/casual',
+                description: 'Fun and relaxing games'
+            },
+            { 
+                title: 'CLICKER', 
+                icon: '🖱️', 
+                url: 'https://poki.com/en/clicker',
+                description: 'Click your way to success'
+            },
+            { 
+                title: 'IO GAMES', 
+                icon: '🌐', 
+                url: 'https://poki.com/en/io',
+                description: 'Multiplayer online battles'
+            },
+            { 
+                title: 'COOKING', 
+                icon: '👨‍🍳', 
+                url: 'https://poki.com/en/cooking',
+                description: 'Master culinary challenges'
+            },
+            { 
+                title: 'STICKMAN', 
+                icon: '🏃', 
+                url: 'https://poki.com/en/stickman',
+                description: 'Epic stickman adventures'
+            },
+            { 
+                title: 'ESCAPE', 
+                icon: '🚪', 
+                url: 'https://poki.com/en/escape',
+                description: 'Solve puzzles to break free'
+            },
+            { 
+                title: 'PLATFORMER', 
+                icon: '🪜', 
+                url: 'https://poki.com/en/platformer',
+                description: 'Jump and run through levels'
+            },
+            { 
+                title: 'DEFENSE', 
+                icon: '🛡️', 
+                url: 'https://poki.com/en/defense',
+                description: 'Protect your territory'
+            },
+            { 
+                title: 'HORROR', 
+                icon: '👻', 
+                url: 'https://poki.com/en/horror',
+                description: 'Spine-chilling experiences'
+            }
+        ];
+
+        function renderCategories() {
+            const grid = document.getElementById('categoriesGrid');
+            grid.innerHTML = categories.map(category => `
+                <a href="${category.url}" target="_blank" class="category-card">
+                    <div class="category-icon">${category.icon}</div>
+                    <div class="category-info">
+                        <div class="category-title">${category.title}</div>
+                        <div class="category-description">${category.description}</div>
+                        <div class="play-btn">▶ EXPLORE GAMES</div>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        renderCategories();
+    </script>
+</body>
+</html>
